@@ -1,19 +1,21 @@
 <div class="mt-4 mx-auto px-1 w-75">
 
   <h1 class="text-center"> To Do List</h1>
+  <p>Fecha y hora actual: {{ currentDate | date:'medium' }}</p>
   <div class="mx-auto">
     <label for="addItemInput">Que tenemos que hacer hoy??</label>
     <input #newItem
     placeholder="Agregar un pendiente"
-    (keyup.enter)="addItem(newItem.value);newItem.value= ''"
+    (keyup.enter)="addItem(newItem.value,date.value);newItem.value= ''"
     class="lg-text-input"
     id="addItemInput">
-    <input type="date">
-    <button class="btn-primary" (click)="addItem(newItem.value);newItem.value= ''">agregar</button>
+    <input type="date" #date>
+    <button class="btn-primary" (click)="addItem(newItem.value,date.value);newItem.value= ''">agregar</button>
 </div>
   <ul>
     <li *ngFor="let item of items">
-      <label>{{item.description}}</label>
+      <p>{{item.description}}</p>
+      <p>{{item.date}}</p>
       <input type="checkbox" [checked]="item.done">
       <button class="btn btn-secondary" (click)="removeItem(item)">Eliminar</button>
 
@@ -26,15 +28,22 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+              <p>actualizar tarea </p>
               <input #modalItem
               placeholder="actualizar un pendiente"
               value="{{item.description}}"
               class="lg-text-input"
               id="addItemInput">
+              <p>actualizar fecha </p>
+              <input #dateItem
+              type="date"
+              placeholder="actualizar una Fecha"
+              value="{{item.date}}"
+              class="lg-text-input">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button (click)="updateItem(modalItem.value, item.description);modalItem.value=''" data-bs-dismiss="modal" type="button" class="btn btn-primary">Save changes</button>
+              <button (click)="updateItem(modalItem.value, item.description,dateItem.value);modalItem.value=''" data-bs-dismiss="modal" type="button" class="btn btn-primary">Save changes</button>
             </div>
           </div>
         </div>
