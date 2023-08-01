@@ -1,13 +1,45 @@
-<div>
-  <h1> To Do List</h1>
-  <label for="addItemInput">Que tenemos que hacer hoy??</label>
-  <input #newItem
-  placeholder="Agregar un pendiente"
-  (keyup.enter)="addItem(newItem.value);newItem.value= ''"
-  class="lg-text-input"
-  id="addItemInput">
-  <button class="btn-primary" (click)="addItem(newItem.value);newItem.value= ''">agregar</button>
+<div class="mt-4 mx-auto px-1 w-75">
+
+  <h1 class="text-center"> To Do List</h1>
+  <div class="mx-auto">
+    <label for="addItemInput">Que tenemos que hacer hoy??</label>
+    <input #newItem
+    placeholder="Agregar un pendiente"
+    (keyup.enter)="addItem(newItem.value);newItem.value= ''"
+    class="lg-text-input"
+    id="addItemInput">
+    <input type="date">
+    <button class="btn-primary" (click)="addItem(newItem.value);newItem.value= ''">agregar</button>
+</div>
   <ul>
-    <li *ngFor="let item of items">{{item.description}}</li>
+    <li *ngFor="let item of items">
+      <label>{{item.description}}</label>
+      <input type="checkbox" [checked]="item.done">
+      <button class="btn btn-secondary" (click)="removeItem(item)">Eliminar</button>
+
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">actualizar</button>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">actualizar</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <input #modalItem
+              placeholder="actualizar un pendiente"
+              value="{{item.description}}"
+              class="lg-text-input"
+              id="addItemInput">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button (click)="updateItem(modalItem.value, item.description);modalItem.value=''" data-bs-dismiss="modal" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
   </ul>
 </div>
+
