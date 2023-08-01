@@ -13,10 +13,7 @@ export class AppComponent {
 
   allItems = [
     {description: "dormir",done:true},
-    {description: "ir a mercar",done:false},
-    {description: "lavar ropa",done:false},
-    {description: "ir al doctor",done:false},
-    {description: "ir al odontologo",done:false},
+
   ]
 
   get items() {
@@ -39,4 +36,10 @@ export class AppComponent {
     this.allItems.splice(this.allItems.indexOf(item),1)
   }
 
+  updateItem(newvalue:string,oldtvalue:string): void {
+    const index = this.allItems.findIndex((item) => item.description === oldtvalue);
+    if (index !== -1) {
+      this.allItems[index] = {description:newvalue,done:false};
+      }
+    }
 }
