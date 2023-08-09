@@ -1,1 +1,57 @@
-<p>item works!</p>
+<div class="card mx-auto">
+  <div class="d-flex justify-content-between titles">
+    <p>{{Item.todo | titlecase}}</p>
+    <p>{{Item.responsible | uppercase}}</p>
+  </div>
+
+  <p class="card-desc mt-2">{{Item.description | titlecase}}.</p>
+
+  <div class="d-flex justify-content-between card-foot">
+    <div class="card-butts">
+      <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#updateModal">Update</button>
+      <button class="btn btn-secondary" type="button" (click)="deleteItem(Item._id)">Delete</button>
+    </div>
+
+    <p>{{Item.dueData}}</p>
+  </div>
+</div>
+
+<!-- updatetasks modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-theme="dark">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header d-flex flex-column justify-content-center">
+        <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">Update Your task</h1>
+      </div>
+      <div class="modal-body" data-bs-theme="dark">
+        <div class="mb-3">
+          <label for="UTask-Title" class="form-label">Task Title</label>
+          <input #UTaskTitle1 type="text" class="form-control" id="Task-Title" placeholder="Your Task Name" value="{{Item.todo}}">
+        </div>
+        <div class="mb-3">
+          <label for="UTask-Description" class="form-label">Task Description</label>
+          <textarea #UTaskDesc class="form-control" id="Task-Description" rows="3" placeholder="Your Description here..." value="{{Item.description}}"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="UTask-Responsable" class="form-label">Responsable</label>
+          <input #UTaskResponsable type="text" class="form-control" id="Task-Responsable" placeholder="Task Responsable Name" value="{{Item.responsible}}">
+        </div>
+        <div class="mb-3">
+          <label for="UTask-Date" class="form-label">Final Date</label>
+          <input #UTaskDate type="datetime-local" class="form-control" id="Task-Date" value="{{Item.dueData}}">
+        </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">CANCEL</button>
+        <button type="button" class="btn btn-primary update" data-bs-dismiss="modal" (click)="updateItem(
+          UTaskTitle1.value,
+          UTaskDesc.value,
+          UTaskResponsable.value,
+          UTaskDate.value,
+          Item._id
+        )">UPDATE TASK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
