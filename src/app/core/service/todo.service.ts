@@ -17,10 +17,10 @@ export class TodoService {
   public postTask(url:string, item:any){
     return this.http.post(url,item)
   }
-  public deleteTask(url:string, id:any){
-    this.http.delete(url,id)
+  public deleteTask(url:string){
+    return this.http.delete(url)
   }
   public updateTask(url:string, id:any){
-    this.http.patch(url,id)
+    return this.http.patch(url,id)
   }
 }
