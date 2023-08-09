@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Item } from './shared/models/item';
 import { TodoService } from './core/service/todo.service';
+import { Location } from '@angular/common';
+import { Observable, of } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -10,17 +13,24 @@ import { TodoService } from './core/service/todo.service';
 
 export class AppComponent {
 
-  constructor(private TodoService:TodoService){
+  constructor(private TodoService:TodoService, public location:Location){
 
   }
+  refreshPage() {
+    this.location.back();
+    }
+
   title = 'todo';
   public allItem: any = []
   currentDate: Date = new Date();
 
-  //ToDo: Eliminar esta lista al momento de integrar la API
-  filter: "all" | "active" | "todo" = "all"
-ngOnInit():void{
-  this.loadData();
+  taskTitle = ""
+  addTitle(title: string): void{
+    this.taskTitle = title
+  }
+
+  ngOnInit():void{
+    this.loadData();
   }
   public loadData(){
     this.TodoService.getTask('https://todolist-vp6o.onrender.com/todo/')
@@ -28,48 +38,20 @@ ngOnInit():void{
       console.log (response)
       this.allItem = response;
     })
-}
-  addItem(description:string,dueData:Date | null,todo:string,responsible:string){
+  }
+  addItem(title: string, desc: string, responsable: string, date: string){
     const newTask = {
-      description: description,
-      done:false,
-      dueData: new Date(),
-      todo: todo,
-      responsible: responsible,
+      todo: title,
+      description: desc,
+      responsible: responsable,
+      dueData: date,
+      done: false
     }
     this.allItem.unshift(newTask)
-    this.currentDate = new Date();
     console.log(newTask)
     this.TodoService.postTask("https://todolist-vp6o.onrender.com/todo/create",newTask)
     .subscribe(data =>{
       console.log (data)
-    })
+    });
   }
-  get items() {
-    if (this.filter === "all"){
-      return this.allItem
-    }
-    return this.allItem.filter((item:Item)=>{
-      this.filter ==="todo" ? item.todo : !item.todo
-    })
-  }
-  deleteItem(item:Item){
-    this.allItem.splice(this.allItem.indexOf(item),1)
-  }
-
-  updateItem(description:string,dueData:Date | null,todo:string,responsible:string,oldvalue:string): void {
-    const index = this.allItem.findIndex((item:any) => item.todo === oldvalue);
-    if (index !== -1) {
-      this.allItem[index] = {
-        description: description,
-        done:false,
-        dueData: dueData,
-        todo: todo,
-        responsible: responsible,
-      };
-      this.TodoService.deleteTask("https://todolist-vp6o.onrender.com/todo/delete/:id",this.allItem[index])
-      this.TodoService.updateTask("https://todolist-vp6o.onrender.com/todo/update/:id",this.allItem[index])
-      }
-    }
 }
-
