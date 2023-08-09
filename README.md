@@ -1,8 +1,5 @@
 
 # ToDo-List-Front - Angular
-![image](https://github.com/Sebastian-Beltran-rincon-22/FrondTodoList/assets/132385582/83b25ca5-8da8-4ee4-a6b1-a685520411f2)
-![image](https://github.com/Sebastian-Beltran-rincon-22/FrondTodoList/assets/132385582/85faa76d-c6c7-4dd8-9f8a-2172c5917f6e)
-
 
 En este proyecto se realizo en un ToDo-Api que contiene una base de datos para guardar los pendientes siendo productivo y organizado, puedes visualizar el despliegue 
 <a href="https://to-do-list-front-tau.vercel.app/">aqui</a>
@@ -11,8 +8,10 @@ El proyecto fue creado con [Angular CLI](https://github.com/angular/angular-cli)
 
 
 ## Version Oficial V1.0
+![image](https://github.com/Sebastian-Beltran-rincon-22/FrondTodoList/assets/132385582/83b25ca5-8da8-4ee4-a6b1-a685520411f2)
 
-img
+## Estructura de carpetas
+![image](https://github.com/Sebastian-Beltran-rincon-22/FrondTodoList/assets/132385582/85faa76d-c6c7-4dd8-9f8a-2172c5917f6e)
 
 ## Funcionalidades
 
