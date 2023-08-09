@@ -23,6 +23,8 @@ img
 - Angular CLI
 - Bootstrap
 
+## Referencia Backend
+- Puedes ver la estructura del Back-End clickeando <a href="https://github.com/Sebastian-Beltran-rincon-22/BackendTodo_list">aqui</a>
 ## Instalacion
 
 1 Clona el repositorio en tu maquina local
