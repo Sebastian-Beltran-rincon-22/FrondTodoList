@@ -58,7 +58,7 @@ $ npm i
 
 1 Inicia la app con 
 ```bash
-$ npm run dev
+$ ng s -o
 ```
 
 2 Puedes acceder a ella desde el puerto configurado:
