@@ -1,54 +1,50 @@
-<div class="mt-4 mx-auto px-1 w-75">
-
-  <h1 class="text-center"> To Do List</h1>
-  <p>Fecha y hora actual: {{ currentDate | date:'medium' }}</p>
-  <div class="mx-auto">
-    <label for="addItemInput">Que tenemos que hacer hoy??</label>
-    <input #newItem  type="date" #date type="todo" #todo type="responsible" #responsible type="description" #description type="oldvalue" #oldvalue
-    placeholder="Agregar un pendiente"
-    class="lg-text-input"
-    id="addItemInput"
-    (keyup.enter)="addItem(description.value, date.valueAsDate,responsible.value ,todo.value); newItem.value=''">
-    <button class="btn-primary" (click)="addItem(description.value, date.valueAsDate,responsible.value ,todo.value); newItem.value=''">agregar</button>
-    
+<svg xmlns="http://www.w3.org/2000/svg" class="wave w-100" viewBox="0 0 1440 320"><path fill="#c5b783" fill-opacity="1" d="M0,192L13.3,192C26.7,192,53,192,80,202.7C106.7,213,133,235,160,202.7C186.7,171,213,85,240,48C266.7,11,293,21,320,58.7C346.7,96,373,160,400,160C426.7,160,453,96,480,90.7C506.7,85,533,139,560,176C586.7,213,613,235,640,245.3C666.7,256,693,256,720,250.7C746.7,245,773,235,800,208C826.7,181,853,139,880,128C906.7,117,933,139,960,149.3C986.7,160,1013,160,1040,165.3C1066.7,171,1093,181,1120,176C1146.7,171,1173,149,1200,144C1226.7,139,1253,149,1280,181.3C1306.7,213,1333,267,1360,293.3C1386.7,320,1413,320,1427,320L1440,320L1440,0L1426.7,0C1413.3,0,1387,0,1360,0C1333.3,0,1307,0,1280,0C1253.3,0,1227,0,1200,0C1173.3,0,1147,0,1120,0C1093.3,0,1067,0,1040,0C1013.3,0,987,0,960,0C933.3,0,907,0,880,0C853.3,0,827,0,800,0C773.3,0,747,0,720,0C693.3,0,667,0,640,0C613.3,0,587,0,560,0C533.3,0,507,0,480,0C453.3,0,427,0,400,0C373.3,0,347,0,320,0C293.3,0,267,0,240,0C213.3,0,187,0,160,0C133.3,0,107,0,80,0C53.3,0,27,0,13,0L0,0Z"></path></svg>
+<h1 class="text-center title">ToDo App</h1>
+<div class="add-tasks-main d-flex justify-content-center">
+  <input #TaskInputTitle class="add-tasks py-1" type="text" placeholder="Add new Tasks">
+  <button class="px-3" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="addTitle(TaskInputTitle.value)">+</button>
 </div>
-  <ul>
-    <li *ngFor="let item of items">
-      <p>{{item.description}}</p>
-      <p>{{item.date}}</p>
-      <input type="checkbox" [checked]="item.done">
-      <button class="btn btn-secondary" (click)="deleteItem(item)">Eliminar</button>
 
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">actualizar</button>
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">actualizar</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <p>actualizar tarea </p>
-              <input #modalItem
-              placeholder="actualizar un pendiente"
-              value="{{item.description}}"
-              class="lg-text-input"
-              id="addItemInput">
-              <p>actualizar fecha </p>
-              <input #dateItem
-              type="date"
-              placeholder="actualizar una Fecha"
-              value="{{item.date}}"
-              class="lg-text-input">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button (click)="updateItem(description.value, date.valueAsDate,responsible.value ,todo.value, oldvalue.value); newItem.value=''" data-bs-dismiss="modal" type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
+<!-- task list -->
+<h2 class="text-center tasks-title">Tasks</h2>
+<ng-container *ngFor="let item of allItem" class="d-flex flex-column justify-content-center card-main">
+  <app-item [Item]="item"></app-item>
+</ng-container>
+
+<!-- Add tasks modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-theme="dark">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header d-flex flex-column justify-content-center">
+        <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">Customize your task</h1>
       </div>
-    </li>
-  </ul>
+      <div class="modal-body" data-bs-theme="dark">
+        <div class="mb-3">
+          <label for="Task-Title" class="form-label">Task Title</label>
+          <input #TaskTitle1 type="text" class="form-control" id="Task-Title" placeholder="Your Task Name" value="{{taskTitle}}">
+        </div>
+        <div class="mb-3">
+          <label for="Task-Description" class="form-label">Task Description</label>
+          <textarea #TaskDesc class="form-control" id="Task-Description" rows="3" placeholder="Your Description here..."></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="Task-Responsable" class="form-label">Responsable</label>
+          <input #TaskResponsable type="text" class="form-control" id="Task-Responsable" placeholder="Task Responsable Name">
+        </div>
+        <div class="mb-3">
+          <label for="Task-Date" class="form-label">Final Date</label>
+          <input #TaskDate type="datetime-local" class="form-control" id="Task-Date">
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">CANCEL</button>
+        <button type="button" class="btn btn-primary create" data-bs-dismiss="modal" (click)="
+        addItem(
+        TaskTitle1.value,
+        TaskDesc.value,
+        TaskResponsable.value,
+        TaskDate.value
+        )">CREATE TASK</button>
+      </div>
+    </div>
+  </div>
 </div>
-
