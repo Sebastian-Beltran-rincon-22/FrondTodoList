@@ -1,8 +1,9 @@
 export interface Item {
-  todo: string
-  description: string
-  responsible: string
-  dueData: string
-  _id: string
-  __v: number
+  __v:         number;
+  _id:         string;
+  description: string;
+  done:        boolean;
+  dueData:     Date;
+  responsible: string;
+  todo:        string;
 }
