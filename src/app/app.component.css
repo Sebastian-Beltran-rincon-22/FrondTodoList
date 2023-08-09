@@ -1,0 +1,85 @@
+.wave{
+  position: absolute;
+  z-index: -3;
+}
+.title{
+  color: #5B4E42;
+  font-weight: bold;
+  padding-top: 3rem;
+  font-size: 4rem;
+}
+.add-tasks-main{
+  margin-top: 1.5rem;
+}
+.add-tasks-main button{
+  background-color: #121214;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #C5B783;
+  margin-left: -1rem;
+}
+.add-tasks{
+  width: 80%;
+  height: 43px;
+  border: none;
+  background-color: #121214;
+  border-radius: 8px;
+  color: #eeeeee;
+  padding-left: 1rem;
+  font-weight: bold;
+}
+.add-tasks::placeholder{
+ color: #C5B783;
+ font-weight: bold;
+ padding-left: 0.8rem;
+ outline: none;
+}
+.add-tasks:focus{
+  outline: none;
+}
+.modal-body div label{
+  color: #C5B783;
+  font-weight: 500;
+}
+.modal-header h1{
+  color: #fff;
+  font-weight: bold;
+}
+.modal-body div input,textarea{
+  background-color: #121214!important;
+}
+.create{
+  background-color: #C5B783;
+  color: #000;
+  border: none;
+  font-weight: bold;
+}
+.cancel{
+  background-color: #2F2F36;
+  border: none;
+}
+@media(min-width: 675px){
+  .add-tasks{
+    width: 60%;
+  }
+  .add-tasks-main{
+    margin-top: 2.5rem;
+  }
+}
+
+@media (min-width: 1200px){
+  .add-tasks{
+    width: 35%;
+  }
+  .add-tasks-main{
+    margin-top: 3rem;
+  }
+}
+
+.tasks-title{
+  color: #fff;
+  margin-top: 3rem;
+  font-size: 2.5rem;
+  margin-bottom: 1.3rem;
+}
