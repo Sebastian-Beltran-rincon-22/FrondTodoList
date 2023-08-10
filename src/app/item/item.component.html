@@ -10,6 +10,7 @@
     <div class="card-butts">
       <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#updateModal">Update</button>
       <button class="btn btn-secondary" type="button" (click)="deleteItem(Item._id)">Delete</button>
+      <input type="checkbox" checked={{Item.done}}>
     </div>
 
     <p>{{Item.dueData}}</p>
